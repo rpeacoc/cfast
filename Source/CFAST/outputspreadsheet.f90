@@ -304,6 +304,7 @@ module spreadsheet_routines
     ! write out spreadsheet values for the current time step
     position = 0
     outarray = 0._eb
+    call get_target_temperatures
     do i = 1, n_ssdevice
         ssptr => ssdeviceinfo(i)
         call ssaddvaluetooutput (ssptr, time, position, outarray)
@@ -1687,6 +1688,7 @@ module spreadsheet_routines
     
     ! target temperature
     if (n_targets/=0) then
+        call get_target_temperatures
         do i = 1, n_targets
             targptr => targetinfo(i)
             call ssaddtolist(position,targptr%tinternal-kelvin_c_offset,outarray)
